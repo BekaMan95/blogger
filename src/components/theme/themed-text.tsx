@@ -36,6 +36,7 @@ export function ThemedText({
 const styles = StyleSheet.create({
   default: {
     fontSize: 16,
+    fontFamily: 'georgia',
     lineHeight: 24,
   },
   defaultSemiBold: {

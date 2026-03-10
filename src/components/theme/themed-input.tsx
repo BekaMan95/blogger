@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
     fontSize: 16,
+    fontFamily: 'georgia',
   },
   outlined: {
     paddingVertical: 10,
@@ -53,6 +54,7 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 16,
     fontSize: 16,
+    fontFamily: 'georgia',
   },
   filled: {
     paddingVertical: 10,
@@ -60,5 +62,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     backgroundColor: '#f0f0f0',
     fontSize: 16,
+    fontFamily: 'georgia',
   },
 });
