@@ -23,8 +23,9 @@ function App() {
     <Provider store={ store }>
       <SafeAreaProvider>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <ToastContainer />
+        
         <RootLayout />
+        <ToastContainer />
       </SafeAreaProvider>
     </Provider>
   );

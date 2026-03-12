@@ -43,6 +43,7 @@ function* addPostWorker(action: ReturnType<typeof addPostRequested>) {
   try {
     const response: Post = yield call(postApi.addPost, action.payload)
     yield put(addPostSucceeded(response))
+    throw new Error ('falied to add  post')
     yield put(
       pushToast({
         title: 'Success',

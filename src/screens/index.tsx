@@ -18,7 +18,7 @@ export default function HomeScreen() {
     <ThemedView style={{ flex: 1, padding: 20, gap: 30 }}>
       <AddModal visible={showModal} onClose={() => {setShowModal(false)}} />
         <Image
-            source={{uri: 'https://thumbs.dreamstime.com/b/google-logo-vector-format-white-background-illustration-407571048.jpg'}}
+            source={require('../../assets/logo.png')}
           style={styles.image}
         />
       <ThemedText style={styles.title}>{header}</ThemedText>

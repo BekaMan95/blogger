@@ -43,7 +43,6 @@ export default function PostScreen({ navigation }: NavigationProps) {
             />
           )}
         </ThemedView>
-        <ThemedButton title="Post Details" onPress={() => navigation.navigate('PostDetail')} />
     </ThemedView>
   );
 }

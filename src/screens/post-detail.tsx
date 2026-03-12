@@ -24,7 +24,7 @@ export default function PostDetailScreen({ navigation }: NavigationProps) {
     <ThemedView style={styles.container}>
         <ThemedText style={styles.title}>{selectedPost.title}</ThemedText>
         <ThemedText style={styles.description}>{selectedPost.body}</ThemedText>
-        <TouchableOpacity onPress={() => navigation.navigate('UserDetail', {id: selectedPost.userId})}>
+        <TouchableOpacity onPress={() => navigation.navigate('User Detail', {id: selectedPost.userId})}>
           <ThemedText style={styles.writtenBy}>
             {'Written By'}
           </ThemedText>
