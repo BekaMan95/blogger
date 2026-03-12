@@ -37,7 +37,7 @@ export function PostNavigation() {
         }}
       />
       <PostStack.Screen
-        name="User Detail"
+        name="UserDetail"
         component={UserDetailScreen}
         options={{
           transitionSpec: {

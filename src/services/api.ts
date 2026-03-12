@@ -1,0 +1,176 @@
+
+export interface User {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  address: {
+    street: string;
+    suite: string;
+    city: string;
+    zipcode: string;
+    geo: {
+      lat: string;
+      lng: string
+    }
+  },
+  phone: string,
+  website: string,
+  company: {
+    name: string,
+    catchPhrase: string,
+    bs: string
+  },
+}
+
+
+export interface Post {
+    id: number
+    userId:number
+    title: string
+    body: string
+}
+
+export interface Comment {
+    id: number;
+    postId: number;
+    name: string;
+    email: string;
+    body: string;
+}
+
+
+export interface UserQueryParams {
+  id: string
+}
+
+export interface PostQueryParams {
+  id?: string
+  userId?: string
+}
+
+export interface CommentQueryParams {
+  id?: string
+}
+
+
+
+const API_BASE = 'https://jsonplaceholder.typicode.com';
+
+
+
+async function handleResponse<T>(response: Response): Promise<T> {
+    if (!response.ok) {
+        const error = await response.json().catch(() => ({ message: 'Network error' }))
+        throw new Error((error as { message: string }).message || `HTTP ${response.status}`)
+    }
+    return response.json() as Promise<T>
+}
+
+
+export const postApi = {
+    async addPost(postData: Omit<Post, 'id'>): Promise<Post> {
+        const response = await fetch(`${API_BASE}/posts`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify(postData),
+        })
+
+        return handleResponse<Post>(response)
+    },
+    async getPost(params?: PostQueryParams): Promise<Post[]> {
+        
+        const queryParams = new URLSearchParams()
+        if (params) {
+            if (params.id) queryParams.append('id', params.id)
+            if (params.userId) queryParams.append('userId', params.userId)
+        }
+        
+        const queryString = queryParams.toString()
+        const url = queryString ? `${API_BASE}/posts?${queryString}` : `${API_BASE}/posts`
+        
+        const response = await fetch(url, {
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+        })
+        return handleResponse<Post[]>(response)
+    },
+
+    async deletePost(id: string): Promise<void> {
+        await fetch(`${API_BASE}/posts/${id}`, {
+            method: 'DELETE',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+        })
+    },
+}
+
+export const commentApi = {
+    async addComment(commentData: Omit<Comment, 'id'>): Promise<Omit<Comment, 'postId'>> {
+        const response = await fetch(`${API_BASE}/comments`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify(commentData),
+        })
+        return handleResponse<Omit<Comment, 'postId'>>(response)
+    },
+    async getComment(params?: CommentQueryParams): Promise<Comment[]> {
+        
+        const queryParams = new URLSearchParams()
+        if (params) {
+            if (params.id) queryParams.append('id', params.id)
+        }
+        
+        const queryString = queryParams.toString()
+        const url = queryString ? `${API_BASE}/comments?${queryString}` : `${API_BASE}/comments`
+        
+        const response = await fetch(url, {
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+        })
+        return handleResponse<Comment[]>(response)
+    },
+
+    async deleteComment(id: string): Promise<void> {
+        await fetch(`${API_BASE}/comments/${id}`, {
+            method: 'DELETE',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+        })
+    },
+}
+
+export const userApi = {
+    async getUser(params?: UserQueryParams): Promise<User[]> {
+        
+        const queryParams = new URLSearchParams()
+        if (params) {
+            if (params.id) queryParams.append('id', params.id)
+        }
+        
+        const queryString = queryParams.toString()
+        const url = queryString ? `${API_BASE}/users?${queryString}` : `${API_BASE}/users`
+        
+        const response = await fetch(url, {
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+        })
+        return handleResponse<User[]>(response)
+    },
+}

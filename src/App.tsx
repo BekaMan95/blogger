@@ -11,6 +11,8 @@ import { StatusBar, useColorScheme } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import RootLayout from './layout';
+import { store } from './app/store';
+import ToastContainer from './components/toaster-container';
 
 enableScreens();
 
@@ -18,12 +20,13 @@ function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    // <Provider store={ store }>
+    <Provider store={ store }>
       <SafeAreaProvider>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <ToastContainer />
         <RootLayout />
       </SafeAreaProvider>
-    // </Provider>
+    </Provider>
   );
 }
 
