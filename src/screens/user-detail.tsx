@@ -28,7 +28,7 @@ export default function UserDetailScreen({ navigation, route }: UserDetailProps)
   return (
     <ScrollView 
       style={{ flex: 1}}
-      contentContainerStyle={{...styles.contentContainer, paddingTop: insets.top, paddingBottom: 200}}
+      contentContainerStyle={styles.contentContainer}
       showsVerticalScrollIndicator={true} 
     >
       {isLoading && user.length === 0 ? (
@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     marginTop: 60,
     minHeight: '100%',
     padding: 16,
+    paddingBottom: 150,
     gap: 20,
     alignItems: 'center',
     justifyContent: 'center',
