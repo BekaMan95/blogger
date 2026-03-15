@@ -3,17 +3,14 @@ import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { ThemedText } from './theme/themed-text';
 import { useThemeColor } from '../app/hooks';
 import { useAppDispatch } from '../app/store';
-import { selectPost } from '../slices/post-slice';
-import { NavigationProps, PostProps } from '../type';
+import { selectPost } from '../screens/posts/slices/fetch-posts-slice';
+import { PostCardProps } from './types';
+import { toTtileCase } from '../utils';
 
 
-interface CardProps {
-  post: PostProps;
-  nav: NavigationProps;
-}
 
 
-export default function Card({post, nav}: CardProps) {
+export default function Card({post, nav}: PostCardProps) {
 
 //   const [expanded, setExpanded] = useState(false);
   const backgroundColor = useThemeColor({ light: '#eeeeee', dark: '#292e30' }, 'background');
@@ -28,14 +25,14 @@ export default function Card({post, nav}: CardProps) {
 
   return (
     <View style={[styles.card, { backgroundColor }]}>
-      <ThemedText style={styles.title}>{post.title}</ThemedText>
+      <ThemedText style={styles.title}>{toTtileCase(post.title)}</ThemedText>
       <ThemedText
         style={styles.description}
         numberOfLines={1}
       >
         {post.body}
       </ThemedText>
-      <TouchableOpacity onPress={() => {handleDetailNavigation()}}>
+      <TouchableOpacity onPress={() => {handleDetailNavigation(); console.log('read more: ', post) }} >
         <ThemedText style={styles.readMore}>
           {'Read More'}
         </ThemedText>

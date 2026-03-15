@@ -1,12 +1,14 @@
 import { FlatList, StyleSheet } from 'react-native';
-import { ThemedText } from '../components/theme/themed-text';
-import { ThemedView } from '../components/theme/themed-view';
-import { ThemedButton } from '../components/theme/themed-button';
-import { NavigationProps } from '../type';
-import { useAppDispatch, useAppSelector } from '../app/store';
-import Card from '../components/post-card';
-import { fetchPostRequested } from '../slices/post-slice';
-import { useEffect } from 'react';
+import { ThemedText } from '../../components/theme/themed-text';
+import { ThemedView } from '../../components/theme/themed-view';
+import { ThemedButton } from '../../components/theme/themed-button';
+import { NavigationProps } from './types';
+import { useAppDispatch, useAppSelector } from '../../app/store';
+import Card from '../../components/post-card';
+import { fetchPostsRequested } from './slices/fetch-posts-slice';
+import { useEffect, useState } from 'react';
+import { DEFAULT_PAGE_NUMBER } from '../../utils/constants';
+import { useSelector } from 'react-redux';
 
 
 
@@ -14,11 +16,16 @@ import { useEffect } from 'react';
 export default function PostScreen({ navigation }: NavigationProps) {
   const header = 'Find some blog posts here...';
   const dispatch = useAppDispatch();
-  const { posts, isLoading } = useAppSelector((s) => s.post);
+  const { posts, isLoading } = useAppSelector((s) => s.fetchPosts);
+  const [page,setPage] = useState(DEFAULT_PAGE_NUMBER);
+  
+  const handlePageNumber= (number:number)=>{
+    setPage(number);
+  }
 
   useEffect(() => {
     const params = { userId: 5 };
-    dispatch(fetchPostRequested(params))
+    dispatch(fetchPostsRequested(params))
   }, [dispatch])
 
   return (

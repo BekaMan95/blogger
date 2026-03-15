@@ -1,15 +1,18 @@
-import { useAppSelector } from '../app/hooks';
-import { ThemedButton } from '../components/theme/themed-button';
-import { ThemedText } from '../components/theme/themed-text';
-import { ThemedView } from '../components/theme/themed-view';
-import { NavigationProps } from '../type';
+import { useState } from 'react';
+import { useAppSelector } from '../../app/hooks';
+import { ThemedButton } from '../../components/theme/themed-button';
+import { ThemedText } from '../../components/theme/themed-text';
+import { ThemedView } from '../../components/theme/themed-view';
+import { NavigationProps } from '../posts/types';
 import { TouchableOpacity, StyleSheet } from 'react-native';
+import AddCommentModal from '../../components/add-comment-modal';
 
 
 
 
 export default function PostDetailScreen({ navigation }: NavigationProps) {
-  const { selectedPost } = useAppSelector((s) => s.post);
+  const { selectedPost } = useAppSelector((s) => s.fetchPosts);
+  const [showModal, setShowModal] = useState(false);
 
   if(!selectedPost) {
     return (
@@ -22,14 +25,16 @@ export default function PostDetailScreen({ navigation }: NavigationProps) {
 
   return (
     <ThemedView style={styles.container}>
+        <AddCommentModal visible={showModal} postId={selectedPost.id} onClose={() => {setShowModal(false)}} />
         <ThemedText style={styles.title}>{selectedPost.title}</ThemedText>
         <ThemedText style={styles.description}>{selectedPost.body}</ThemedText>
         <TouchableOpacity onPress={() => navigation.navigate('User Detail', {id: selectedPost.userId})}>
           <ThemedText style={styles.writtenBy}>
-            {'Written By'}
+            {'Written By...'}
           </ThemedText>
         </TouchableOpacity>
-        <ThemedButton variant="outline" title="Go Back" onPress={() => navigation.goBack()} />
+        <ThemedButton variant="primary" title="Write comments" onPress={() => {setShowModal(true)}} />
+        <ThemedButton variant="outline" title="Go Back" style={{  }} onPress={() => navigation.goBack()} />
     </ThemedView>
   );
 }
@@ -40,7 +45,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingTop: 40,
-    gap: 20,
+    gap: 30,
   },
   title: {
     fontSize: 24,

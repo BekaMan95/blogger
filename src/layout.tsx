@@ -2,7 +2,7 @@ import { DarkTheme, DefaultTheme, NavigationContainer, ThemeProvider } from '@re
 import { Image, StyleSheet, Text, useColorScheme, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from './screens';
+import HomeScreen from './screens/home';
 import PostScreen from './screens/posts';
 import { createStackNavigator } from '@react-navigation/stack';
 import PostDetailScreen from './screens/post-detail';

@@ -1,11 +1,10 @@
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ThemedText } from '../components/theme/themed-text';
-import { ThemedView } from '../components/theme/themed-view';
-import { ThemedButton } from '../components/theme/themed-button';
-import { UserDetailProps } from '../type';
+import { ThemedText } from '../../components/theme/themed-text';
+import { ThemedView } from '../../components/theme/themed-view';
+import { ThemedButton } from '../../components/theme/themed-button';
+import { UserDetailProps } from './types';
 import { StyleSheet, ScrollView } from 'react-native';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { fetchUserRequested } from '../slices/user-slice';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { fetchUserRequested } from './slices/fetch-user-slice';
 import { useEffect } from 'react';
 
 
@@ -13,9 +12,8 @@ import { useEffect } from 'react';
 
 
 export default function UserDetailScreen({ navigation, route }: UserDetailProps) {
-  const insets = useSafeAreaInsets();
   const dispatch = useAppDispatch();
-  const { user, isLoading } = useAppSelector((s) => s.user);
+  const { user, isLoading } = useAppSelector((s) => s.fetchUser);
   const { id } = route.params;
   
   useEffect(() => {

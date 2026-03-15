@@ -4,17 +4,18 @@ import { GestureResponderEvent } from "react-native";
 import { ThemedInput } from "./theme/themed-input";
 import { ThemedButton } from "./theme/themed-button";
 import { useAppDispatch, useAppSelector } from "../app/store";
-import { addPostRequested } from "../slices/post-slice";
+import { addPostRequested } from "../screens/home/slices/add-post-slice";
 import { useState } from "react";
 
-interface AddModalProps {
+interface AddPostModalProps {
   visible: boolean;
   onClose: (event?: GestureResponderEvent) => void;
 }
 
-export default function AddModal({ visible, onClose }: AddModalProps) {
+export default function AddPostModal({ visible, onClose }: AddPostModalProps) {
+    const modalTitle = 'Add Post';
     const dispatch = useAppDispatch()
-    const { isLoading } = useAppSelector((s) => s.post)
+    const { isLoading } = useAppSelector((s) => s.addPost)
     const [formData, setFormData] = useState({
         userId: 0,
         title: '',
@@ -37,9 +38,14 @@ export default function AddModal({ visible, onClose }: AddModalProps) {
 
     return (
         <ThemedModal 
-            visible={visible} onClose={() => {onClose()}}
+            visible={visible} onClose={() => {onClose()}} 
+            style={{
+                paddingTop: 50,
+                width: '80%',
+                gap: 5,
+            }}
         >
-            <ThemedText style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 20 }} > Add Post </ThemedText>
+            <ThemedText style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 20 }} >{modalTitle}</ThemedText>
             <ThemedInput placeholder="Title" variant="outlined" 
                 style={{ marginVertical: 10, width: '90%' }}
                 value={formData.title}

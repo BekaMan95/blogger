@@ -1,57 +1,11 @@
-
-export interface User {
-  id: number;
-  name: string;
-  username: string;
-  email: string;
-  address: {
-    street: string;
-    suite: string;
-    city: string;
-    zipcode: string;
-    geo: {
-      lat: string;
-      lng: string
-    }
-  },
-  phone: string,
-  website: string,
-  company: {
-    name: string,
-    catchPhrase: string,
-    bs: string
-  },
-}
-
-
-export interface Post {
-    id: number
-    userId:number
-    title: string
-    body: string
-}
-
-export interface Comment {
-    id: number;
-    postId: number;
-    name: string;
-    email: string;
-    body: string;
-}
-
-
-export interface UserQueryParams {
-  id: string
-}
-
-export interface PostQueryParams {
-  id?: string
-  userId?: string
-}
-
-export interface CommentQueryParams {
-  id?: string
-}
+import { 
+    User, 
+    Post, 
+    Comment, 
+    UserQueryParams, 
+    PostQueryParams, 
+    CommentQueryParams 
+} from './types';
 
 
 
@@ -128,7 +82,7 @@ export const commentApi = {
         
         const queryParams = new URLSearchParams()
         if (params) {
-            if (params.id) queryParams.append('id', params.id)
+            if (params.postId) queryParams.append('postId', params.postId)
         }
         
         const queryString = queryParams.toString()

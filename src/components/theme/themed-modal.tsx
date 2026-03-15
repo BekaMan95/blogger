@@ -11,13 +11,14 @@ import { Colors } from '../../theme';
 import { ThemedText } from './themed-text';
 
 interface CustomModalProps {
+  style?: object;
   visible: boolean;
   onClose: (event?: GestureResponderEvent) => void;
   children?: ReactNode;
 }
 
 
-export default function ThemedModal({ visible, onClose, children }: CustomModalProps) {
+export default function ThemedModal({ visible, onClose, children, style }: CustomModalProps) {
   const colorScheme = useColorScheme();
   const backgroundColor = Colors[ colorScheme === 'dark' ? 'dark' : 'light'].modalBackground;
   
@@ -29,7 +30,7 @@ export default function ThemedModal({ visible, onClose, children }: CustomModalP
       onRequestClose={onClose}
     >
       <View style={styles.overlay}>
-        <View style={[styles.modalContainer, {backgroundColor}]}>
+        <View style={[styles.modalContainer, {backgroundColor}, style]}>
           <TouchableOpacity style={styles.closeIcon} onPress={onClose}>
             <ThemedText style={styles.closeText}> X </ThemedText>
           </TouchableOpacity>
@@ -48,9 +49,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalContainer: {
-    width: '80%',
-    height: '40%',
-    backgroundColor: '#fff',
     borderRadius: 14,
     padding: 20,
     alignItems: 'center',
