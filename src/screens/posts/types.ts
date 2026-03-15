@@ -18,6 +18,8 @@ export type NavigationProps = {
 
 export interface PostState {
   posts: PostProps[];
+  start: number;
+  limit: number;
   selectedPost: PostProps | null;
   isLoading: boolean;
   error: string | null;
@@ -35,6 +37,3 @@ export interface PostListProps {
   posts: PostProps[];
 };
 
-export interface PostQueryParams {
-  userId?: number;
-}

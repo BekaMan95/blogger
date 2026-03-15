@@ -56,6 +56,8 @@ export interface UserQueryParams {
 export interface PostQueryParams {
   id?: string
   userId?: string
+  start?: string
+  limit?: string
 }
 
 export interface CommentQueryParams {

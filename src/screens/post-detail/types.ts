@@ -10,9 +10,6 @@ export interface CommentListProps {
   comments: CommentProps[];
 }
 
-export interface CommentQueryParams {
-  postId?: string;
-}
 
 export interface CommentState {
   comments: CommentProps[];

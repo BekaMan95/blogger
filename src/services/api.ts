@@ -41,6 +41,8 @@ export const postApi = {
         if (params) {
             if (params.id) queryParams.append('id', params.id)
             if (params.userId) queryParams.append('userId', params.userId)
+            if (params.start) queryParams.append('_start', params.start.toString())
+            if (params.limit) queryParams.append('_limit', params.limit.toString())
         }
         
         const queryString = queryParams.toString()
@@ -52,6 +54,7 @@ export const postApi = {
                 'Accept': 'application/json',
             },
         })
+        // console.log('API Response for getPost:', response.json(), 'with params:', queryString);
         return handleResponse<Post[]>(response)
     },
 

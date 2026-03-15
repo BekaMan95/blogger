@@ -1,9 +1,13 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { PostProps, PostQueryParams, PostState } from "../types";
+import { PostProps, PostState } from "../types";
+import { PostQueryParams } from "../../../services/types";
+import { DEFAULT_PAGE_NUMBER, DEFAULT_PAGE_SIZE } from "../../../utils/constants";
 
 
 const initialState: PostState = {
   posts: [],
+  start: DEFAULT_PAGE_NUMBER,
+  limit: DEFAULT_PAGE_SIZE,
   selectedPost: null,
   isLoading: false,
   error: null,
