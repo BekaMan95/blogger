@@ -11,8 +11,14 @@ export interface CommentListProps {
 }
 
 
-export interface CommentState {
+export interface CommentsState {
   comments: CommentProps[];
-  isLoadingComment: boolean;
+  isLoadingComments: boolean;
+  error: string | null;
+}
+
+export interface AddCommentState {
+  comment: CommentProps| null;
+  isLoading: boolean;
   error: string | null;
 }

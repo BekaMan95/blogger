@@ -1,10 +1,11 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { CommentProps, CommentQueryParams, CommentState } from "../types";
+import { CommentProps, CommentsState } from "../types";
+import { CommentQueryParams } from "../../../services/types";
 
 
-const initialState: CommentState = {
+const initialState: CommentsState = {
   comments: [],
-  isLoadingComment: false,
+  isLoadingComments: false,
   error: null,
 };
 
@@ -15,16 +16,16 @@ const fetchCommentSlice = createSlice({
 
     reducers: {
         fetchCommentsRequested(state, _action: PayloadAction<CommentQueryParams | undefined>) {
-            state.isLoadingComment = true
+            state.isLoadingComments = true
             state.error = null
         },
         fetchCommentsSucceeded(state, action: PayloadAction<CommentProps[]>) {
             state.comments = action.payload
-            state.isLoadingComment = false
+            state.isLoadingComments = false
             state.error = null
         },
         fetchCommentsFailed(state, action: PayloadAction<string>) {
-            state.isLoadingComment = false
+            state.isLoadingComments = false
             state.error = "Failed to fetch comments"
         },
     }

@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { CommentProps, CommentState } from "../types";
+import { CommentProps, AddCommentState } from "../types";
 
 
-const initialState: CommentState = {
-  comments: [],
-  isLoadingComment: false,
+const initialState: AddCommentState = {
+  comment: null,
+  isLoading: false,
   error: null,
 };
 
@@ -15,17 +15,16 @@ const addCommentSlice = createSlice({
 
     reducers: {
         addCommentRequested(state, action: PayloadAction<Omit<CommentProps, 'id'>>) {
-            state.isLoadingComment = true
+            state.isLoading = true
             state.error = null
         },
         addCommentSucceeded: (state, action: PayloadAction<CommentProps>) => {
-            action.payload.id = -state.comments.length;
-            state.comments.unshift(action.payload);
-            state.isLoadingComment = false
+            state.comment = action.payload;
+            state.isLoading = false
             state.error = null
         },
         addCommentFailed(state, action: PayloadAction<string>) {
-            state.isLoadingComment = false
+            state.isLoading = false
             state.error = "Failed to add comment"
         }
     }

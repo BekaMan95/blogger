@@ -29,7 +29,7 @@ function* addCommentWorker(action: ReturnType<typeof addCommentRequested>) {
     const response: Comment = yield call(commentApi.addComment, action.payload)
     yield put(addCommentSucceeded(response))
     // Refetch comments after a successfull add
-    yield put(fetchCommentsRequested({ postId: response.postId.toString() }))
+    yield put(fetchCommentsRequested({ postId: action.payload.postId.toString() }))
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Add Comment failed!'
     yield put(pushToast({ title: 'Error', description: message }))

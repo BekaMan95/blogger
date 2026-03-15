@@ -20,3 +20,10 @@ export interface AddCommentModalProps {
     visible: boolean;
     onClose: (event?: GestureResponderEvent) => void;
 }
+
+
+export interface AddPostModalProps {
+  visible: boolean;
+  onClose: (event?: GestureResponderEvent) => void;
+}
+
